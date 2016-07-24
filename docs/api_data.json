@@ -1,8 +1,12 @@
 [
   {
+    "version": "0.0.1",
     "type": "get",
     "url": "/token",
     "title": "Request user token",
+    "description": "<p>Returns the user token. If the user doesn't exist, it creates the user and returns data anyway.</p>",
+    "name": "GetToken",
+    "group": "User",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -41,12 +45,16 @@
             "description": ""
           }
         ]
-      }
+      },
+      "examples": [
+        {
+          "title": "Success response",
+          "content": "{\n \"data\": {\"user_id\": 1, \"token\": \"sdsjakldasjdaldkj\"},\n \"errors\": []\n}",
+          "type": "json"
+        }
+      ]
     },
-    "version": "0.0.0",
     "filename": "app/Http/Controllers/UserController.php",
-    "group": "_home_agustin_Documents_FIUBA_SplitAppServer_app_Http_Controllers_UserController_php",
-    "groupTitle": "_home_agustin_Documents_FIUBA_SplitAppServer_app_Http_Controllers_UserController_php",
-    "name": "GetToken"
+    "groupTitle": "User"
   }
 ]

@@ -9,6 +9,15 @@ use App\Http\Requests;
 
 class UserController extends Controller
 {
+    /**
+     * @api {get} /token Request user token
+     *
+     * @apiParam {String} facebook_id
+     * @apiParam {String} facebook_token
+     *
+     * @apiSuccess {Int} user_id
+     * @apiSuccess {String} token
+     */
     public function getToken(Request $request) {
         $user = User::whereFacebookId($request->input("facebook_id"))->first();
         if (!$user)

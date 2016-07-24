@@ -1,6 +1,6 @@
 FROM php:7.0-fpm
 
-RUN apt-get update && apt-get install -y wget unzip npm
+RUN apt-get update && apt-get install -y wget unzip npm nodejs-legacy
 
 RUN docker-php-ext-install pdo_mysql
 

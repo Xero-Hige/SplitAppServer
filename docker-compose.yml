@@ -1,0 +1,55 @@
+nginx:
+    build: ./dockerfiles/nginx/
+    ports:
+        - 80:80
+    links:
+        - php
+    volumes_from:
+        - src
+    container_name: splitapp_nginx
+
+php:
+    build: ./dockerfiles/php/
+    expose:
+        - 9000
+    links:
+        - mysql
+    volumes_from:
+        - src
+    container_name: splitapp_php
+
+src:
+    image: php:7.0-fpm
+    volumes:
+        - .:/var/www/html
+    command: "true"
+    container_name: splitapp_src
+
+mysql:
+    image: mysql:latest
+    volumes_from:
+        - data
+    environment:
+        MYSQL_ROOT_PASSWORD: secret
+        MYSQL_DATABASE: project
+        MYSQL_USER: project
+        MYSQL_PASSWORD: project
+    container_name: splitapp_mysql
+
+data:
+    image: mysql:latest
+    volumes:
+        - /var/lib/mysql
+    command: "true"
+    container_name: splitapp_mysql_data
+
+phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+        - 8080:80
+    links:
+        - mysql
+    environment:
+        PMA_HOST: mysql
+        PHP_UPLOAD_MAX_FILESIZE: 500M
+    container_name: splitapp_phpmyadmin

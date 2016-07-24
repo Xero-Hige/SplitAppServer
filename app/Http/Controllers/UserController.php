@@ -10,11 +10,6 @@ use App\Http\Requests;
 class UserController extends Controller
 {
     public function getToken(Request $request) {
-        $this->validate($request, [
-            "facebook_id" => "required",
-            "facebook_token" => "required"
-        ]);
-
         $user = User::whereFacebookId($request->input("facebook_id"))->first();
         if (!$user)
             return response()->api_not_found(["facebook_id"]);

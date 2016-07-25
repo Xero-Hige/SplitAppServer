@@ -29,6 +29,12 @@ class UserController extends Controller
      * }
      */
     public function getToken(Request $request) {
+        if (!$request->input("facebook_id"))
+            return response()->api_invalid(["facebook_id" => ["El campo facebook_id es obligatorio."]]);
+
+        if (!$request->input("facebook_token"))
+            return response()->api_invalid(["facebook_token" => ["El campo facebook_token es obligatorio."]]);
+
         $user = User::whereFacebookId($request->input("facebook_id"))->first();
         if (!$user)
             return response()->api_not_found(["facebook_id"]);

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class CreateEventInviteesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,11 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('event_invitees', function (Blueprint $table) {
             $table->timestamps();
-            $table->string("facebook_id", 80);
-            $table->text("facebook_token");
-            $table->string("token", 40);
-            $table->primary("facebook_id");
+            $table->unsignedInteger("event_id");
+            $table->unsignedInteger("user_id");
+            $table->primary(["event_id", "user_id"]);
         });
     }
 
@@ -28,6 +27,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('users');
+        Schema::drop('event_invitees');
     }
 }

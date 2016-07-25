@@ -14,6 +14,27 @@ class Authentication
     
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        $userid = $request->header('X-Auth-UserID');
+        $token = $request->header('X-Auth-Token');
+
+        if (!$token)
+            return response()->api_invalid(["auth_token" => ["El header X-Auth-UserID es obligatorio."]]);
+        if (!$userid)
+            return response()->api_invalid(["auth_userid" => ["El header X-Auth-Token es obligatorio."]]);
+
+        /**
+         * @var User $user
+         */
+        $user = User::whereFacebookId($userid)->get()->first();
+
+        if ($user == NULL)
+            return response()->api_unauthorized();
+
+        if ($token == $user->token) {
+            auth()->login($user);
+            return $next($request);
+        } else {
+            return response()->api_unauthorized();
+        }
     }
 }

@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
+    protected $primaryKey = "facebook_id";
+    public $incrementing = FALSE;
+
     public function checkFacebookToken($facebook_token) {
         //TODO: Implement
         return TRUE;

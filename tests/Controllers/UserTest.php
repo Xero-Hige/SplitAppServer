@@ -29,7 +29,7 @@ class UserTest extends TestCase
         $token1 = $resp->data->token;
         $this->assertEquals(20, strlen($resp->data->token));
         
-        $user2 = \App\Models\User::whereId($user->id)->first();
+        $user2 = \App\Models\User::whereFacebookId($user->facebook_id)->first();
         $this->assertEquals($user2->token, $resp->data->token);
 
         $this->json("GET", "token", [

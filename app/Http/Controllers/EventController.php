@@ -2,20 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
 class EventController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(Request $request)
     {
-        //
+
     }
 
     /**
@@ -45,9 +41,14 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($event_id)
     {
-        //
+        $user = auth()->user();
+
+        $event = Event::find($event_id);
+        if (!$event) return response()->api_not_found();
+        $event->whenIso = $event->when->toIso8601String();
+        return response()->api_ok($event);
     }
 
     /**

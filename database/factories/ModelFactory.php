@@ -18,3 +18,12 @@ $factory->define(App\Models\User::class, function(Faker\Generator $faker) {
         "token" => str_random(20)
     ];
 });
+
+$factory->define(App\Models\Event::class, function(Faker\Generator $faker) {
+    return [
+        "name" => str_random(20),
+        "when" => $faker->dateTime,
+        "lat" => $faker->latitude,
+        "long" => $faker->longitude
+    ];
+});

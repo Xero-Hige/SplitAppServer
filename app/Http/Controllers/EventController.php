@@ -36,7 +36,53 @@ class EventController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * @apiVersion 0.0.1
+     *
+     * @api {get} /events/:event_id Get event
+     * @apiDescription Returns the event.
+     * @apiName GetEvent
+     * @apiGroup Event
+     * 
+     * @apiHeader {String} X-Auth-UserID Facebook ID for the user
+     * @apiHeader {String} X-Auth-Token Token retrieved using /token
+     *
+     * @apiParam {Int} event_id
+     *
+     * @apiSuccessExample {json} Success response
+     * {
+     *    "data": [
+     *      {
+     *          "name": "asd",
+     *          "when": "2016-07-25 19:30:00",
+     *          "when_iso": "2016-07-25T19:30:00-03:00",
+     *          "lat": -53.04,
+     *          "long": -53.04,
+     *          "invitees": [
+     *              {
+     *                  "facebook_id": 231231231
+     *              },
+     *              {
+     *                  "facebook_id": 244
+     *              }
+     *          ],
+     *          "tasks": [
+     *              {
+     *                  "assignee": 231231231,
+     *                  "name": "COMPRAR PAN",
+     *                  "cost": 4.50,
+     *                  "done": true
+     *              },
+     *              {
+     *                  "assignee": 231231231,
+     *                  "name": "COMPRAR QUESO",
+     *                  "cost": null,
+     *                  "done": false
+     *              },
+     *          ]
+     *      }
+     *    ],
+     *    "errors": []
+     * }
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

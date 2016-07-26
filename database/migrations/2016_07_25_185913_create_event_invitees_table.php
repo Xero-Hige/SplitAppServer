@@ -17,6 +17,9 @@ class CreateEventInviteesTable extends Migration
             $table->unsignedInteger("event_id");
             $table->string("user_id", 80);
             $table->primary(["event_id", "user_id"]);
+
+            $table->foreign("user_id")->references("facebook_id")->on("users");
+            $table->foreign("event_id")->references("id")->on("events");
         });
     }
 

@@ -20,9 +20,9 @@ class CreateEventTasksTable extends Migration
             $table->string("name");
             $table->decimal("cost");
             $table->boolean("done");
-            /**
-             * tasks:[fb_id: integer, name: string, done: bool, cost: float]
-             */
+
+            $table->foreign("assignee")->references("facebook_id")->on("users");
+            $table->foreign("event_id")->references("id")->on("events");
         });
     }
 

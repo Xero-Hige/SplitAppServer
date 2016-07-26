@@ -19,9 +19,6 @@ class CreateEventsTable extends Migration
             $table->timestamp("when");
             $table->decimal("lat");
             $table->decimal("long");
-            /**
-             * {name: string, tasks:[], timestamp: timestamp, geotag: {lat:floatt, long:float}, invited:[]}
-             */
         });
     }
 

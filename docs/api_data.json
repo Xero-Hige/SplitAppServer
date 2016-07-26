@@ -107,14 +107,14 @@
             "group": "Header",
             "type": "String",
             "optional": false,
-            "field": "facebook_id",
+            "field": "X-Facebook-ID",
             "description": ""
           },
           {
             "group": "Header",
             "type": "String",
             "optional": false,
-            "field": "facebook_token",
+            "field": "X-Facebook-Token",
             "description": ""
           }
         ]

@@ -16,7 +16,7 @@ class CreateEventTasksTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->unsignedInteger("event_id");
-            $table->unsignedInteger("assignee");
+            $table->string("assignee", 80);
             $table->string("name");
             $table->decimal("cost");
             $table->boolean("done");

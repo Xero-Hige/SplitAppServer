@@ -15,7 +15,7 @@ class CreateEventInviteesTable extends Migration
         Schema::create('event_invitees', function (Blueprint $table) {
             $table->timestamps();
             $table->unsignedInteger("event_id");
-            $table->unsignedInteger("user_id");
+            $table->string("user_id", 80);
             $table->primary(["event_id", "user_id"]);
         });
     }

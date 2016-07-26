@@ -15,6 +15,7 @@ class User extends Model implements AuthorizableContract,
 
     protected $primaryKey = "facebook_id";
     public $incrementing = FALSE;
+    protected $hidden = ["facebook_token", "token", "pivot"];
 
     public function checkFacebookToken($facebook_token) {
         //TODO: Implement
@@ -24,5 +25,9 @@ class User extends Model implements AuthorizableContract,
     public function generateToken() {
         $this->token = str_random(20);
         $this->save();
+    }
+
+    public function events() {
+        return $this->belongsToMany(Event::class, "event_invitees");
     }
 }

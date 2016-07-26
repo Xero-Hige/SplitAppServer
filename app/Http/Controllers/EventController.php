@@ -3,15 +3,77 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
 class EventController extends Controller
 {
+    /**
+     * @apiVersion 0.0.1
+     *
+     * @api {get} /events/ Get events
+     * @apiDescription Returns the event list.
+     * @apiName GetEvents
+     * @apiGroup Event
+     *
+     * @apiHeader {String} X-Auth-UserID Facebook ID for the user
+     * @apiHeader {String} X-Auth-Token Token retrieved using /token
+     *
+     * @apiSuccessExample {json} Success response
+     * {
+     *    "data": [
+     *      {
+     *          "name": "asd",
+     *          "when": "2016-07-25 19:30:00",
+     *          "when_iso": "2016-07-25T19:30:00-03:00",
+     *          "lat": -53.04,
+     *          "long": -53.04,
+     *          "invitees": [
+     *              {
+     *                  "facebook_id": 231231231
+     *              },
+     *              {
+     *                  "facebook_id": 244
+     *              }
+     *          ],
+     *          "tasks": [
+     *              {
+     *                  "assignee": 231231231,
+     *                  "name": "COMPRAR PAN",
+     *                  "cost": 4.50,
+     *                  "done": true
+     *              },
+     *              {
+     *                  "assignee": 231231231,
+     *                  "name": "COMPRAR QUESO",
+     *                  "cost": null,
+     *                  "done": false
+     *              },
+     *          ]
+     *      }
+     *    ],
+     *    "errors": []
+     * }
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index(Request $request)
     {
+        /**
+         * @var User $user
+         */
+        $user = auth()->user();
+        
+        $events = $user->events()->with('tasks')->get();
 
+        foreach ($events as $event) {
+            $event->whenIso = $event->when->toIso8601String();
+            $event->invitees = $event->invitees()->get();
+        }
+
+        return response()->api_ok($events);
     }
 
     /**

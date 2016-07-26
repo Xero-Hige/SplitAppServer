@@ -21,8 +21,8 @@ class UserTest extends TestCase
         $user->save();
 
         $this->json("GET", "tokens", [], [
-            "facebook_id" => $user->facebook_id,
-            "facebook_token" => "a"
+            "X-Auth-Facebook-ID" => $user->facebook_id,
+            "X-Auth-Facebook-Token" => "a"
         ]);
         $this->assertEquals(200, $this->response->getStatusCode());
         $resp = json_decode($this->response->content());
@@ -33,8 +33,8 @@ class UserTest extends TestCase
         $this->assertEquals($user2->token, $resp->data->token);
 
         $this->json("GET", "tokens", [], [
-            "facebook_id" => $user->facebook_id,
-            "facebook_token" => $user->facebook_token
+            "X-Auth-Facebook-ID" => $user->facebook_id,
+            "X-Auth-Facebook-Token" => $user->facebook_token
         ]);
         $this->assertEquals(200, $this->response->getStatusCode());
         $resp = json_decode($this->response->content());

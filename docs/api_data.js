@@ -67,7 +67,7 @@ define({ "api": [
             "group": "Header",
             "type": "String",
             "optional": false,
-            "field": "X-Auth-UserID",
+            "field": "X-Auth-Facebook-ID",
             "description": "<p>Facebook ID for the user</p>"
           },
           {
@@ -107,14 +107,14 @@ define({ "api": [
             "group": "Header",
             "type": "String",
             "optional": false,
-            "field": "X-Facebook-ID",
+            "field": "X-Auth-Facebook-ID",
             "description": ""
           },
           {
             "group": "Header",
             "type": "String",
             "optional": false,
-            "field": "X-Facebook-Token",
+            "field": "X-Auth-Facebook-Token",
             "description": ""
           }
         ]

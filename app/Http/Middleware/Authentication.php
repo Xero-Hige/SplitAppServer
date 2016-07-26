@@ -14,11 +14,11 @@ class Authentication
     
     public function handle($request, Closure $next)
     {
-        $userid = $request->header('X-Auth-UserID');
+        $userid = $request->header('X-Auth-Facebook-ID');
         $token = $request->header('X-Auth-Token');
 
         if (!$token)
-            return response()->api_invalid(["auth_token" => ["El header X-Auth-UserID es obligatorio."]]);
+            return response()->api_invalid(["auth_token" => ["El header X-Auth-Facebook-ID es obligatorio."]]);
         if (!$userid)
             return response()->api_invalid(["auth_userid" => ["El header X-Auth-Token es obligatorio."]]);
 

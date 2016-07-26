@@ -14,7 +14,7 @@ class EventTest extends TestCase
         $event = factory(\App\Models\Event::class)->create();
         $event = \App\Models\Event::find($event->id);
 
-        $this->json("GET", "events/".$event->id, [], ["X-Auth-UserID" => $user->facebook_id, "X-Auth-Token" => $user->token]);
+        $this->json("GET", "events/".$event->id, [], ["X-Auth-Facebook-ID" => $user->facebook_id, "X-Auth-Token" => $user->token]);
         $this->assertEquals(200, $this->response->getStatusCode());
 
         $data = json_decode($this->response->content())->data;

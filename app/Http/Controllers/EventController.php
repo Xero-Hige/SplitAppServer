@@ -18,7 +18,7 @@ class EventController extends Controller
      * @apiName GetEvents
      * @apiGroup Event
      *
-     * @apiHeader {String} X-Auth-UserID Facebook ID for the user
+     * @apiHeader {String} X-Auth-Facebook-ID Facebook ID for the user
      * @apiHeader {String} X-Auth-Token Token retrieved using /token
      *
      * @apiSuccessExample {json} Success response

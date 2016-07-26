@@ -17,8 +17,8 @@ class UserController extends Controller
      * @apiName GetToken
      * @apiGroup User
      *
-     * @apiHeader {String} X-Facebook-ID
-     * @apiHeader {String} X-Facebook-Token
+     * @apiHeader {String} X-Auth-Facebook-ID
+     * @apiHeader {String} X-Auth-Facebook-Token
      *
      * @apiSuccess {Int} user_id
      * @apiSuccess {String} token
@@ -29,8 +29,8 @@ class UserController extends Controller
      * }
      */
     public function getToken(Request $request) {
-        $userid = $request->header('X-Facebook-ID');
-        $token = $request->header('X-Facebook-Token');
+        $userid = $request->header('X-Auth-Facebook-ID');
+        $token = $request->header('X-Auth-Facebook-Token');
 
         if (!$userid)
             return response()->api_invalid(["facebook_id" => ["El campo facebook_id es obligatorio."]]);

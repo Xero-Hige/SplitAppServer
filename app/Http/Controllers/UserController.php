@@ -12,13 +12,13 @@ class UserController extends Controller
     /**
      * @apiVersion 0.0.1
      *
-     * @api {get} /token Request user token
+     * @api {get} /tokens Request user token
      * @apiDescription Returns the user token. If the user doesn't exist, it creates the user and returns data anyway.
      * @apiName GetToken
      * @apiGroup User
      *
-     * @apiParam {String} facebook_id
-     * @apiParam {String} facebook_token
+     * @apiHeader {String} facebook_id
+     * @apiHeader {String} facebook_token
      *
      * @apiSuccess {Int} user_id
      * @apiSuccess {String} token
@@ -29,17 +29,24 @@ class UserController extends Controller
      * }
      */
     public function getToken(Request $request) {
-        if (!$request->input("facebook_id"))
+        $userid = $request->header('facebook_id');
+        $token = $request->header('facebook_token');
+
+        if (!$userid)
             return response()->api_invalid(["facebook_id" => ["El campo facebook_id es obligatorio."]]);
 
-        if (!$request->input("facebook_token"))
+        if (!$token)
             return response()->api_invalid(["facebook_token" => ["El campo facebook_token es obligatorio."]]);
 
-        $user = User::whereFacebookId($request->input("facebook_id"))->first();
-        if (!$user)
-            return response()->api_not_found(["facebook_id"]);
+        $user = User::whereFacebookId($userid)->first();
+        if (!$user) {
+            $user = new User();
+            $user->facebook_id = $userid;
+            $user->facebook_token = $token;
+            $user->save();
+        }
 
-        if (!$user->checkFacebookToken($request->input("facebook_token")))
+        if (!$user->checkFacebookToken($token))
             return response()->api_forbidden();
 
         $user->generateToken();

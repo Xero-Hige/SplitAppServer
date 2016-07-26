@@ -12,7 +12,7 @@ class UserTest extends TestCase
     {
         $user = factory(\App\Models\User::class)->create();
 
-        $this->json("GET", "token");
+        $this->json("GET", "tokens");
         $this->assertEquals(422, $this->response->getStatusCode());
     }
 
@@ -20,7 +20,7 @@ class UserTest extends TestCase
         $user = factory(\App\Models\User::class)->create();
         $user->save();
 
-        $this->json("GET", "token", [
+        $this->json("GET", "tokens", [], [
             "facebook_id" => $user->facebook_id,
             "facebook_token" => "a"
         ]);
@@ -32,7 +32,7 @@ class UserTest extends TestCase
         $user2 = \App\Models\User::whereFacebookId($user->facebook_id)->first();
         $this->assertEquals($user2->token, $resp->data->token);
 
-        $this->json("GET", "token", [
+        $this->json("GET", "tokens", [], [
             "facebook_id" => $user->facebook_id,
             "facebook_token" => $user->facebook_token
         ]);

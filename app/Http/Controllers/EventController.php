@@ -183,7 +183,27 @@ class EventController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * @apiVersion 0.0.1
+     *
+     * @api {put} /events/:event_id Update event
+     * @apiDescription Updates an event.
+     * @apiName PutEvent
+     * @apiGroup Event
+     *
+     * @apiHeader {String} X-Auth-Facebook-ID Facebook ID for the user
+     * @apiHeader {String} X-Auth-Token Token retrieved using /token
+     *
+     * @apiParam {Int} :event_id
+     * @apiParam {String} name
+     * @apiParam {String} when
+     * @apiParam {String} lat
+     * @apiParam {String} long
+     *
+     * @apiSuccess {Int} id New event id
+     * @apiSuccess {String} name
+     * @apiSuccess {String} when
+     * @apiSuccess {String} lat
+     * @apiSuccess {String} long
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -191,7 +211,23 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = auth()->user();
+
+        $event = Event::find($id);
+        if (!$event) return response()->api_not_found();
+
+        $vars = ["name", "when", "lat", "long"];
+        foreach ($vars as $var)
+            if (!$request->input($var))
+                return response()->api_invalid([$var => ["El campo es obligatorio."]]);
+
+        $event->name = $request->input("name");
+        $event->when = new \DateTime($request->input("when"));
+        $event->lat = $request->input("lat");
+        $event->long = $request->input("long");
+        $event->save();
+
+        return response()->api_ok($event);
     }
 
     /**

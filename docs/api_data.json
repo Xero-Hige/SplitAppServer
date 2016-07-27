@@ -94,6 +94,84 @@
   },
   {
     "version": "0.0.1",
+    "type": "post",
+    "url": "/events",
+    "title": "Post event",
+    "description": "<p>Creates a new event. The user who creates the event will be the first invitee.</p>",
+    "name": "PostEvent",
+    "group": "Event",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "X-Auth-Facebook-ID",
+            "description": "<p>Facebook ID for the user</p>"
+          },
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "X-Auth-Token",
+            "description": "<p>Token retrieved using /token</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "when",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "lat",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "long",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Int",
+            "optional": false,
+            "field": "id",
+            "description": "<p>New event id</p>"
+          }
+        ]
+      }
+    },
+    "filename": "app/Http/Controllers/EventController.php",
+    "groupTitle": "Event"
+  },
+  {
+    "version": "0.0.1",
     "type": "get",
     "url": "/tokens",
     "title": "Request user token",

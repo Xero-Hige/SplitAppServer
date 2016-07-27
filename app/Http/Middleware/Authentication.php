@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Middleware;
-
+use App\Http\Requests\Request;
+use Log;
 use Closure;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Exception\HttpResponseException;
@@ -14,6 +15,8 @@ class Authentication
     
     public function handle($request, Closure $next)
     {
+        Log::debug("[".$request->method()."] ".$request->url().PHP_EOL.print_r($request->all(), TRUE).PHP_EOL."X-Auth-Facebook-ID: ".$request->header('X-Auth-Facebook-ID')." X-Auth-Token: ".$request->header('X-Auth-Token').PHP_EOL);
+
         $userid = $request->header('X-Auth-Facebook-ID');
         $token = $request->header('X-Auth-Token');
 

@@ -79,16 +79,6 @@ class EventController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * @apiVersion 0.0.1
      *
      * @api {post} /events Post event
@@ -190,17 +180,6 @@ class EventController extends Controller
         if (!$event) return response()->api_not_found();
         $event->whenIso = $event->when->toIso8601String();
         return response()->api_ok($event);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**

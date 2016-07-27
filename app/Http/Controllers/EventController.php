@@ -27,6 +27,7 @@ class EventController extends Controller
      * {
      *    "data": [
      *      {
+     *          "id": 1
      *          "name": "asd",
      *          "when": "2016-07-25 19:30:00",
      *          "when_iso": "2016-07-25T19:30:00-03:00",

@@ -23,6 +23,8 @@ class EventTest extends TestCase
         $this->assertEquals($event->when, $data->when);
         $this->assertEquals($event->lat, $data->lat);
         $this->assertEquals($event->long, $data->long);
+        $this->assertObjectHasAttribute("invitees", $data);
+        $this->assertObjectHasAttribute("tasks", $data);
     }
 
     public function testGetEvents()

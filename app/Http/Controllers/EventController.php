@@ -198,7 +198,7 @@ class EventController extends Controller
     {
         $user = auth()->user();
 
-        $event = Event::find($event_id);
+        $event = Event::with("tasks")->with("invitees")->find($event_id);
         if (!$event) return response()->api_not_found();
         $event->whenIso = $event->when->toIso8601String();
         return response()->api_ok($event);

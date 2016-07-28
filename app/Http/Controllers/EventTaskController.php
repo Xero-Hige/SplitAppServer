@@ -58,8 +58,9 @@ class EventTaskController extends Controller
         if ($request->input("assignee")) {
             $assignee = User::find($request->input("assignee"));
             if (!$assignee) return response()->api_not_found(["assignee" => "patient"]);
-            $assignee->eventTasks()->save($eventTask);
+            $eventTask->assignee = $assignee->facebook_id;
         }
+        $eventTask->save();
 
         return response()->api_ok(["id" => $eventTask->id]);
     }

@@ -11,4 +11,7 @@ Route::group(['middleware' => ['App\Http\Middleware\Authentication']], function 
 
     Route::resource("events.invitees", "EventInviteeController",
         ['only' => ['store']]);
+
+    Route::resource("eventTemplates", "EventTemplateController",
+        ['only' => ['store']]);
 });

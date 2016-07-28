@@ -46,7 +46,7 @@ class EventTaskController extends Controller
     {
         $vars = ["name", "cost"];
         foreach ($vars as $var)
-            if (!array_keys($var, $request->input))
+            if (!array_key_exists($var, $request->input()))
                 return response()->api_invalid([$var => ["El campo es obligatorio."]]);
 
         $user = auth()->user();

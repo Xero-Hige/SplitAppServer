@@ -59,7 +59,7 @@ class EventTaskTest extends TestCase
         $this->assertEquals("some", $eventTask->name);
         $this->assertEquals(5, $eventTask->cost);
         $this->assertEquals($user->facebook_id, $eventTask->assignee);
-        $this->assertEquals(TRUE, $eventTask->done);
+        $this->assertSame(TRUE, $eventTask->done);
     }
 
     public function testPutEventTaskEmptyFields()

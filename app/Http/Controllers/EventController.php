@@ -200,7 +200,7 @@ class EventController extends Controller
      * @apiParam {String} lat
      * @apiParam {String} long
      *
-     * @apiSuccess {Int} id New event id
+     * @apiSuccess {Int} id event id
      * @apiSuccess {String} name
      * @apiSuccess {String} when
      * @apiSuccess {String} lat

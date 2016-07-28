@@ -247,7 +247,7 @@ define({ "api": [
             "type": "Int",
             "optional": false,
             "field": "id",
-            "description": "<p>New event id</p>"
+            "description": "<p>event id</p>"
           },
           {
             "group": "Success 200",

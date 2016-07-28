@@ -95,6 +95,57 @@
   {
     "version": "0.0.1",
     "type": "post",
+    "url": "/events/:event_id/invitees",
+    "title": "Post event invitee",
+    "description": "<p>Creates a new invitee.</p>",
+    "name": "PostInvitee",
+    "group": "EventInvitee",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "X-Auth-Facebook-ID",
+            "description": "<p>Facebook ID for the user</p>"
+          },
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "X-Auth-Token",
+            "description": "<p>Token retrieved using /token</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": false,
+            "field": ":event_id",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "invitee",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "filename": "app/Http/Controllers/EventInviteeController.php",
+    "groupTitle": "EventInvitee"
+  },
+  {
+    "version": "0.0.1",
+    "type": "post",
     "url": "/events",
     "title": "Post event",
     "description": "<p>Creates a new event. The user who creates the event will be the first invitee.</p>",

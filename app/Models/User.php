@@ -30,4 +30,8 @@ class User extends Model implements AuthorizableContract,
     public function events() {
         return $this->belongsToMany(Event::class, "event_invitees");
     }
+
+    public function eventTasks() {
+        return $this->hasMany(EventTask::class, "assignee", "facebook_id");
+    }
 }

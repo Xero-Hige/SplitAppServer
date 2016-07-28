@@ -6,5 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class EventTask extends Model
 {
-    //
+    public function assignee() {
+        return $this->belongsTo(User::class, "facebook_id", "assignee");
+    }
 }

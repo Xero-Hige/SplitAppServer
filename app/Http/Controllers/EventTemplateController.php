@@ -17,7 +17,9 @@ class EventTemplateController extends Controller
      */
     public function index()
     {
-        //
+        $eventTemplates = EventTemplate::with("tasks")->get();
+
+        return response()->api_ok($eventTemplates);
     }
 
     /**

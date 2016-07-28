@@ -13,5 +13,5 @@ Route::group(['middleware' => ['App\Http\Middleware\Authentication']], function 
         ['only' => ['store']]);
 
     Route::resource("eventTemplates", "EventTemplateController",
-        ['only' => ['store']]);
+        ['only' => ['index', 'store']]);
 });

@@ -7,5 +7,5 @@ Route::group(['middleware' => ['App\Http\Middleware\Authentication']], function 
         ['only' => ['show', 'index', 'store', 'update']]);
 
     Route::resource("events.tasks", "EventTaskController",
-        ['only' => ['store']]);
+        ['only' => ['store', 'update']]);
 });

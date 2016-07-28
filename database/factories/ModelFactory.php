@@ -27,3 +27,11 @@ $factory->define(App\Models\Event::class, function(Faker\Generator $faker) {
         "long" => $faker->longitude
     ];
 });
+
+$factory->define(App\Models\EventTask::class, function(Faker\Generator $faker) {
+    return [
+        "name" => str_random(20),
+        "cost" => $faker->numberBetween(0, 300),
+        "done" => FALSE
+    ];
+});

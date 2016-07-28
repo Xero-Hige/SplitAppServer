@@ -363,6 +363,126 @@ define({ "api": [
   },
   {
     "version": "0.0.1",
+    "type": "put",
+    "url": "/events/:event_id/tasks/:task_id",
+    "title": "Put event task",
+    "description": "<p>Updates a task.</p>",
+    "name": "PutTask",
+    "group": "EventTask",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "X-Auth-Facebook-ID",
+            "description": "<p>Facebook ID for the user</p>"
+          },
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "X-Auth-Token",
+            "description": "<p>Token retrieved using /token</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": false,
+            "field": ":event_id",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": false,
+            "field": ":task_id",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "assignee",
+            "description": "<p>May be NULL</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Float",
+            "optional": false,
+            "field": "cost",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Bool",
+            "optional": false,
+            "field": "done",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Int",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Event task id</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "assignee",
+            "description": "<p>May be NULL</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": ""
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "cost",
+            "description": ""
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "done",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "filename": "app/Http/Controllers/EventTaskController.php",
+    "groupTitle": "EventTask"
+  },
+  {
+    "version": "0.0.1",
     "type": "get",
     "url": "/tokens",
     "title": "Request user token",

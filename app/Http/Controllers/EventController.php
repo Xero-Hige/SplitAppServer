@@ -253,7 +253,17 @@ class EventController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @apiVersion 0.0.1
+     *
+     * @api {delete} /events/:event_id Delete event
+     * @apiDescription Deletes an event.
+     * @apiName DeleteEvent
+     * @apiGroup Event
+     *
+     * @apiHeader {String} X-Auth-Facebook-ID Facebook ID for the user
+     * @apiHeader {String} X-Auth-Token Token retrieved using /token
+     *
+     * @apiParam {Int} :event_id
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

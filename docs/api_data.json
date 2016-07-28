@@ -1,6 +1,50 @@
 [
   {
     "version": "0.0.1",
+    "type": "delete",
+    "url": "/events/:event_id",
+    "title": "Delete event",
+    "description": "<p>Deletes an event.</p>",
+    "name": "DeleteEvent",
+    "group": "Event",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "X-Auth-Facebook-ID",
+            "description": "<p>Facebook ID for the user</p>"
+          },
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "X-Auth-Token",
+            "description": "<p>Token retrieved using /token</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": false,
+            "field": ":event_id",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "filename": "app/Http/Controllers/EventController.php",
+    "groupTitle": "Event"
+  },
+  {
+    "version": "0.0.1",
     "type": "get",
     "url": "/events/:event_id",
     "title": "Get event",
@@ -545,6 +589,94 @@
     },
     "filename": "app/Http/Controllers/EventTaskController.php",
     "groupTitle": "EventTask"
+  },
+  {
+    "version": "0.0.1",
+    "type": "get",
+    "url": "/eventTemplates",
+    "title": "Show event templates",
+    "description": "<p>Shows templates.</p>",
+    "name": "GetTemplate",
+    "group": "EventTemplate",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "X-Auth-Facebook-ID",
+            "description": "<p>Facebook ID for the user</p>"
+          },
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "X-Auth-Token",
+            "description": "<p>Token retrieved using /token</p>"
+          }
+        ]
+      }
+    },
+    "filename": "app/Http/Controllers/EventTemplateController.php",
+    "groupTitle": "EventTemplate"
+  },
+  {
+    "version": "0.0.1",
+    "type": "post",
+    "url": "/eventTemplates",
+    "title": "Post event template",
+    "description": "<p>Creates a new template.</p>",
+    "name": "PostTemplate",
+    "group": "EventTemplate",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "X-Auth-Facebook-ID",
+            "description": "<p>Facebook ID for the user</p>"
+          },
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "X-Auth-Token",
+            "description": "<p>Token retrieved using /token</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": false,
+            "field": "event_id",
+            "description": "<p>Event which will serve as a base for the template</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Int",
+            "optional": false,
+            "field": "id",
+            "description": "<p>New event template id</p>"
+          }
+        ]
+      }
+    },
+    "filename": "app/Http/Controllers/EventTemplateController.php",
+    "groupTitle": "EventTemplate"
   },
   {
     "version": "0.0.1",

@@ -11,7 +11,15 @@ use App\Http\Requests;
 class EventTemplateController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @apiVersion 0.0.1
+     *
+     * @api {get} /eventTemplates Show event templates
+     * @apiDescription Shows templates.
+     * @apiName GetTemplate
+     * @apiGroup EventTemplate
+     *
+     * @apiHeader {String} X-Auth-Facebook-ID Facebook ID for the user
+     * @apiHeader {String} X-Auth-Token Token retrieved using /token
      *
      * @return \Illuminate\Http\Response
      */

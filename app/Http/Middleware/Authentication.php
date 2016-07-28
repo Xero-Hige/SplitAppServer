@@ -20,8 +20,8 @@ class Authentication
         $userid = $request->header('X-Auth-Facebook-ID');
         $token = $request->header('X-Auth-Token');
 
-        /*if (!$token)
-            return response()->api_invalid(["auth_token" => ["El header X-Auth-Token es obligatorio."]]);*/
+        if (!$token)
+            return response()->api_invalid(["auth_token" => ["El header X-Auth-Token es obligatorio."]]);
         if (!$userid)
             return response()->api_invalid(["auth_userid" => ["El header X-Auth-Facebook-ID es obligatorio."]]);
 
@@ -33,11 +33,11 @@ class Authentication
         if ($user == NULL)
             return response()->api_unauthorized();
 
-        //if ($token == $user->token) {
+        if ($token == $user->token) {
             auth()->login($user);
             return $next($request);
-        /*} else {
+        } else {
             return response()->api_unauthorized();
-        }*/
+        }
     }
 }

@@ -98,7 +98,8 @@ class EventTest extends TestCase
             "name" => "some",
             "when" => "2016-07-28 00:00:00",
             "lat" => 2,
-            "long" => 5
+            "long" => 5,
+            "invitees" => []
         ], ["X-Auth-Facebook-ID" => $user->facebook_id, "X-Auth-Token" => $user->token]);
         $this->assertEquals(200, $this->response->getStatusCode());
 
@@ -110,6 +111,35 @@ class EventTest extends TestCase
         $this->assertEquals("2016-07-28 00:00:00", $event->when);
         $this->assertEquals(2, $event->lat);
         $this->assertEquals(5, $event->long);
+    }
+
+    public function testPostEventAddingInvitees()
+    {
+        /**
+         * @var \App\Models\Event $event
+         */
+        $user = factory(\App\Models\User::class)->create();
+        $invitee1 = factory(\App\Models\User::class)->create();
+        $invitee2 = factory(\App\Models\User::class)->create();
+
+        $this->json("POST", "events", [
+            "name" => "some",
+            "when" => "2016-07-28 00:00:00",
+            "lat" => 2,
+            "long" => 5,
+            "invitees" => [$invitee1->facebook_id, $invitee2->facebook_id]
+        ], ["X-Auth-Facebook-ID" => $user->facebook_id, "X-Auth-Token" => $user->token]);
+        $this->assertEquals(200, $this->response->getStatusCode());
+
+        $data = json_decode($this->response->content())->data;
+
+        $event = \App\Models\Event::find($data->id);
+
+        $this->assertEquals("some", $event->name);
+        $this->assertEquals("2016-07-28 00:00:00", $event->when);
+        $this->assertEquals(2, $event->lat);
+        $this->assertEquals(5, $event->long);
+        $this->assertEquals(3, $event->invitees()->get()->count());
     }
 
     public function testPutEvent()

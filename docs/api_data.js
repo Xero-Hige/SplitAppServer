@@ -201,9 +201,23 @@ define({ "api": [
             "optional": false,
             "field": "long",
             "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "String[]",
+            "optional": false,
+            "field": "invitees",
+            "description": "<p>The creating user is an invitee by default and mustn't be included in this field</p>"
           }
         ]
-      }
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n name: \"a\",\n when: \"2016-07-25 08:00:00\",\n lat: 3\n long: 2,\n invitees: [\n     23213131,\n     32132131,\n     23213556\n ]\n}",
+          "type": "json"
+        }
+      ]
     },
     "success": {
       "fields": {

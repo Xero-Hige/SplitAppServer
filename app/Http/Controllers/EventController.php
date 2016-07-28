@@ -94,6 +94,20 @@ class EventController extends Controller
      * @apiParam {String} when
      * @apiParam {String} lat
      * @apiParam {String} long
+     * @apiParam {String[]} invitees The creating user is an invitee by default and mustn't be included in this field
+     *
+     * @apiParamExample {json} Request-Example:
+     * {
+     *  name: "a",
+     *  when: "2016-07-25 08:00:00",
+     *  lat: 3
+     *  long: 2,
+     *  invitees: [
+     *      23213131,
+     *      32132131,
+     *      23213556
+     *  ]
+     * }
      *
      * @apiSuccess {Int} id New event id
      *
@@ -101,9 +115,9 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        $vars = ["name", "when", "lat", "long"];
+        $vars = ["name", "when", "lat", "long", "invitees"];
         foreach ($vars as $var)
-            if (!$request->input($var))
+            if (!array_key_exists($var, $request->input()))
                 return response()->api_invalid([$var => ["El campo es obligatorio."]]);
 
         $user = auth()->user();
@@ -114,6 +128,13 @@ class EventController extends Controller
         $event->lat = $request->input("lat");
         $event->long = $request->input("long");
         $event->save();
+
+        foreach ($request->input("invitees") as $invitee_id) {
+            $eventInvitee = new EventInvitee();
+            $eventInvitee->event_id = $event->id;
+            $eventInvitee->user_id = $invitee_id;
+            $eventInvitee->save();
+        }
 
         $eventInvitee = new EventInvitee();
         $eventInvitee->event_id = $event->id;

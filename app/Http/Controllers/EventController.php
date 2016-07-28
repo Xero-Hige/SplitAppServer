@@ -260,6 +260,9 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $event = Event::with("tasks")->with("invitees")->find($id);
+        if (!$event) return response()->api_not_found();
+        $event->delete();
+        return response()->api_ok([]);
     }
 }

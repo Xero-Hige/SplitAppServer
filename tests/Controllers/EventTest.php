@@ -166,4 +166,18 @@ class EventTest extends TestCase
         $this->assertEquals(2, $event->lat);
         $this->assertEquals(5, $event->long);
     }
+
+    public function testDeleteEvent()
+    {
+        $user = factory(\App\Models\User::class)->create();
+        $event = factory(\App\Models\Event::class)->create();
+
+        $this->json("DELETE", "events/".$event->id, [], ["X-Auth-Facebook-ID" => $user->facebook_id, "X-Auth-Token" => $user->token]);
+        $this->assertEquals(200, $this->response->getStatusCode());
+
+        $data = json_decode($this->response->content())->data;
+
+        $deletedEvent = \App\Models\Event::find($event->id);
+        $this->assertNull($deletedEvent);
+    }
 }
